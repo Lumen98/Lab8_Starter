@@ -33,28 +33,12 @@ async function init() {
  * of installing it and getting it running
  */
 function initializeServiceWorker() {
-  // EXPLORE - START (All explore numbers start with B)
-  /*******************/
-  // ServiceWorkers have many uses, the most common of which is to manage
-  // local caches, intercept network requests, and conditionally serve from
-  // those local caches. This increases performance since users aren't
-  // re-downloading the same resources every single page visit. This also allows
-  // websites to have some (if not all) functionality offline! I highly
-  // recommend reading up on ServiceWorkers on MDN before continuing.
-  /*******************/
-  // We first must register our ServiceWorker here before any of the code in
-  // sw.js is executed.
-  // B1. Check if 'serviceWorker' is supported in the current browser
   if ('serviceWorker' in navigator) {
-    // B2. Listen for the 'load' event on the window object.
     window.addEventListener('load', async () => {
       try {
-        // B3. Register './sw.js' as a service worker
         const registration = await navigator.serviceWorker.register('./sw.js');
-        // B4. Log success
         console.log('Service Worker registered with scope:', registration.scope);
       } catch (err) {
-        // B5. Log failure
         console.log('Service Worker registration failed:', err);
       }
     });
