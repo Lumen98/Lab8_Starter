@@ -1,9 +1,5 @@
-// sw.js - This file needs to be in the root of the directory to work,
-//         so do not move it next to the other scripts
-
 const CACHE_NAME = 'lab-8-starter';
 
-// The recipe URLs that should be pre-cached when the service worker installs.
 const RECIPE_URLS = [
   'https://adarsh249.github.io/Lab8-Starter/recipes/1_50-thanksgiving-side-dishes.json',
   'https://adarsh249.github.io/Lab8-Starter/recipes/2_roasting-turkey-breast-with-stuffing.json',
@@ -17,7 +13,6 @@ const RECIPE_URLS = [
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      // B6. Add all of the URLs from RECIPE_URLs to the cache.
       return cache.addAll(RECIPE_URLS);
     })
   );
@@ -31,10 +26,9 @@ self.addEventListener('activate', function (event) {
 // Intercept fetch requests and cache them
 self.addEventListener('fetch', function (event) {
   event.respondWith(
-    // B7. Open the cache using CACHE_NAME
     caches.open(CACHE_NAME).then((cache) => {
-      // B8. If the request is in the cache, return the cached version.
-      //     Otherwise fetch, add to cache, and return the network response.
+      // If the request is in the cache, return the cached version.
+      // Otherwise fetch, add to cache, and return the network response.
       return cache.match(event.request).then((cachedResponse) => {
         return (
           cachedResponse ||
